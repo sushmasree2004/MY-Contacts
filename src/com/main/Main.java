@@ -1,3 +1,4 @@
+
 package com.main;
 
 import com.userManagement.*;
@@ -6,7 +7,7 @@ import com.ContactManagement.*;
 public class Main 
 {
     public static void main(String[] args) throws Exception 
-{
+     {
         // === UC-01: Registration ===
         User freeUser = UserFactory.createUser("FreeUser", "Sushma", "sushma@gmail.com", "pass123");
         System.out.println("Registered: " + freeUser);
@@ -35,6 +36,19 @@ public class Main
                    () -> System.out.println("No active session")
                );
 
+
+
+        // === UC-03: Profile Management ===
+        ProfileManager manager = new ProfileManager();
+        manager.executeCommand(new UpdateEmailCommand("newemail@gmail.com"), freeUser);
+        manager.executeCommand(new UpdatePasswordCommand("newSecurePass"), freeUser);
+        manager.executeCommand(new UpdatePreferencesCommand("Dark Mode"), freeUser);
+        System.out.println("Updated profile: " + freeUser);
+
+        session.logout();
+        System.out.println("User logged out. Active session? " + session.getCurrentUser().isPresent());
+
+        
     }
 }
 
