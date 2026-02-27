@@ -6,6 +6,7 @@ public class UserValidator
 {
     private static final String email = "^[A-Za-z0-9+_.-]+@(.+)$";
 
+    // check e-mail format
     public static void validateEmail(String e) throws Exception 
     {
         if (!Pattern.matches(email, e)) 
@@ -13,7 +14,8 @@ public class UserValidator
             throw new Exception("IInvalid Format ");
         }
     }
-
+    
+    // check password length
     public static void validatePassword(String password) throws Exception 
     {
         if (password.length() < 6) 

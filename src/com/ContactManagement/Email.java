@@ -1,21 +1,30 @@
 package com.ContactManagement;
 
 
+public class Email 
+{
+	private String type;   //  Personal, Work
+	private String address;
 
-public class Email {
-    private String type;   // e.g., Personal, Work
-    private String address;
+	public Email(String type, String address) 
+	{
+		this.type = type;
+		this.address = address;
+	}
 
-    public Email(String type, String address) {
-        this.type = type;
-        this.address = address;
-    }
+	public String getType() 
+	{
+		return type; 
+	}
 
-    public String getType() { return type; }
-    public String getAddress() { return address; }
+	public String getAddress() 
+	{ 
+		return address; 
+	}
 
-    @Override
-    public String toString() {
-        return type + ": " + address;
-    }
+	@Override
+	public String toString() 
+	{
+		return type + ": " + address;
+	}
 }

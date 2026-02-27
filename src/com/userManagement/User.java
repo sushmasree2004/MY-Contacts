@@ -5,7 +5,7 @@ public class User
 	private String name;
 	private String email;
 	private String password;
-	private String type;  // freeUser or PremiumUser
+	private String type;      // freeUser or PremiumUser
 	private String preferences;
 
 	private User(Builder builder) 
@@ -81,7 +81,7 @@ public class User
 		return preferences; 
 	}
 
-	// Setters for UC-03
+	// Setters for UC-3
 	public void setName(String name) 
 	{ 
 		this.name = name; 
