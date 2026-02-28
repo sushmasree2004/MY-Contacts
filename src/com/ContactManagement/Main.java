@@ -2,10 +2,8 @@ package com.main;
 
 import com.ContactManagement.*;
 
-public class Main 
-{
-    public static void main(String[] args) 
-    {
+public class Main {
+    public static void main(String[] args) {
         // UC-04: Create Contact
         Contact personContact = new Contact.Builder("Alice")
                 .addPhoneNumber(new PhoneNumber("Mobile", "9876543210"))
@@ -14,8 +12,6 @@ public class Main
                 .build();
 
         System.out.println("Original Contact: " + personContact);
-        
-        
 
         // UC-06: Edit Contact with undo/redo
         EditContactMemento  editCommand = new EditContactMemento(personContact);
