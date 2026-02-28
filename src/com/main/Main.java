@@ -6,42 +6,39 @@ import java.util.*;
 
 public class Main 
 {
-    public static void main(String[] args) 
-    {
-    	
-        // Sample contacts
-        Contact alice = new Contact.Builder("Alice")
-                .addPhoneNumber(new PhoneNumber("Mobile", "9876543210"))
-                .addEmail(new Email("Personal", "alice@gmail.com"))
-                .setNotes("VIP friend")
-                .build();
+	public static void main(String[] args) 
+	{
+		Contact alice = new Contact.Builder("Alice")
+				.addPhoneNumber(new PhoneNumber("Mobile", "9876543210"))
+				.addEmail(new Email("Personal", "alice@gmail.com"))
+				.setNotes("VIP friend")
+				.build();
 
-        Contact bob = new Contact.Builder("Bob")
-                .addPhoneNumber(new PhoneNumber("Work", "1234567890"))
-                .addEmail(new Email("Work", "bob@company.com"))
-                .setNotes("Colleague")
-                .build();
 
-        List<Contact> contacts = new ArrayList<>();
-        contacts.add(alice);
-        contacts.add(bob);
-        
+		Contact bob = new Contact.Builder("Bob")
+				.addPhoneNumber(new PhoneNumber("Work", "1234567890"))
+				.addEmail(new Email("Work", "bob@company.com"))
+				.setNotes("Colleague")
+				.build();
 
-        // Search by name
-        SearchStrategy nameSearch = new NameSearch();
-        System.out.println("Search by name 'Alice': " + nameSearch.search(contacts, "Alice"));
+		List<Contact> contacts = new ArrayList<>();
+		contacts.add(alice);
+		contacts.add(bob);
 
-        // Search by email
-        SearchStrategy emailSearch = new EmailSearch();
-        System.out.println("Search by email 'bob@company.com': " + emailSearch.search(contacts, "bob@company.com"));
+		// Tag filter
+		ContactFilter tagFilter = new TagFilter();
+		System.out.println("Filter by tag 'VIP': " + tagFilter.filter(contacts, "VIP"));
 
-        // Search by phone
-        SearchStrategy phoneSearch = new PhoneSearch();
-        System.out.println("Search by phone '9876543210': " + phoneSearch.search(contacts, "9876543210"));
+		// Date filter
+		ContactFilter dateFilter = new DateAddedFilter();
+		System.out.println("Filter by date added: " + dateFilter.filter(contacts, ""));
 
-        // Search by tag/notes
-        SearchStrategy tagSearch = new TagSearch();
-        System.out.println("Search by tag 'VIP': " + tagSearch.search(contacts, "VIP"));
-        
-    }
+		// Frequency filter
+		FrequencyFilter freqFilter = new FrequencyFilter();
+		freqFilter.incrementFrequency(alice);
+		freqFilter.incrementFrequency(alice);
+		freqFilter.incrementFrequency(bob);
+
+		System.out.println("Filter by frequency: " + freqFilter.filter(contacts, ""));
+	}
 }
