@@ -96,4 +96,17 @@ public class Contact {
             id, name, phoneNumbers, emails, notes != null ? notes : "N/A", createdAt
         );
     }
+    
+    
+ // inside com.ContactManagement.Contact
+    private Set<com.TaggingOrganization.Tag> tags = new HashSet<>();
+
+    public void addTag(com.TaggingOrganization.Tag tag) {
+        tags.add(tag);
+    }
+
+    public Set<com.TaggingOrganization.Tag> getTags() {
+        return new HashSet<>(tags); // defensive copy
+    }
+
 }
