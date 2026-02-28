@@ -1,49 +1,46 @@
 package com.main;
 
-import com.userManagement.*;
 import com.ContactManagement.*;
+import java.util.*;
 
 public class Main 
 {
-	public static void main(String[] args) throws Exception 
-	{
-		// UC-01: Registration
-		User freeUser = UserFactory.createUser("FreeUser", "Sushma", "sushma@gmail.com", "pass123");
-		System.out.println("Registered: " + freeUser);
+    public static void main(String[] args) 
+    {
+    	
+        // Create sample contacts
+        Contact alice = new Contact.Builder("Alice")
+                .addPhoneNumber(new PhoneNumber("Mobile", "9876543210"))
+                .addEmail(new Email("Personal", "alice@gmail.com"))
+                .setNotes("College friend")
+                .build();
 
+        
+        Contact bob = new Contact.Builder("Bob")
+                .addPhoneNumber(new PhoneNumber("Work", "1234567890"))
+                .addEmail(new Email("Work", "bob@company.com"))
+                .setNotes("Colleague")
+                .build();
 
-		// UC-02: Authentication
-		SessionManager session = SessionManager.getInstance();
-		session.login(freeUser, new BasicAuth(), "pass123")
-		.ifPresentOrElse(
-				u -> System.out.println("Login successful: " + u.getName()),
-				() -> System.out.println("Login failed")
-				);
+        
+        List<Contact> contactList = new ArrayList<>();
+        contactList.add(alice);
+        contactList.add(bob);
 
+        Set<Contact> contactSet = new HashSet<>(contactList);
 
-		// UC-07: Delete Contact (only logged-in user can delete)
-		ContactManager manager = new ContactManager();
+        ContactBulkOperations bulkOps = new ContactBulkOperations();
+        
 
-		Contact alice = new Contact.Builder("Alice")
-				.addPhoneNumber(new PhoneNumber("Mobile", "9876543210"))
-				.addEmail(new Email("Personal", "alice@gmail.com"))
-				.setNotes("College friend")
-				.build();
+        // Tag all contacts
+        bulkOps.tagContacts(contactSet, "VIP");
 
-		manager.addContact(alice);
+        // Export all contacts
+        bulkOps.exportContacts(contactList, "contacts_export.txt");
 
-		if (session.getCurrentUser().isPresent()) 
-		{
-			manager.deleteContact(alice);
-		} 
+        // Delete all contacts
+        bulkOps.deleteContacts(contactList);
 
-		else 
-		{
-			System.out.println("No active session. Cannot delete contact.");
-		}
-
-		// Logout
-		session.logout();
-		System.out.println("User logged out. Active session? " + session.getCurrentUser().isPresent());
-	}
+        System.out.println("Remaining contacts: " + contactList.size());
+    }
 }
