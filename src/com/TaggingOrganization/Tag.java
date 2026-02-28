@@ -21,13 +21,14 @@ public class Tag
 	}
 
 	// Ensure uniqueness in Set collections
+
 	@Override
 	public boolean equals(Object o) 
 	{
-		if (this == o)
+		if (this == o) 
 			return true;
 
-		if (!(o instanceof Tag))
+		if (!(o instanceof Tag)) 
 			return false;
 
 		Tag tag = (Tag) o;
@@ -41,7 +42,7 @@ public class Tag
 	}
 
 	@Override
-	public String toString()
+	public String toString() 
 	{
 		return "Tag{" + name + "}";
 	}

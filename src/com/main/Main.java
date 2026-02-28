@@ -14,25 +14,24 @@ public class Main
                 .setNotes("College friend")
                 .build();
 
-        Contact bob = new Contact.Builder("Bob")
-                .addPhoneNumber(new PhoneNumber("Work", "1234567890"))
-                .addEmail(new Email("Work", "bob@company.com"))
-                .setNotes("Colleague")
-                .build();
-        
-
         Tag family = new Tag("Family");
-        Tag work = new Tag("Work");
         Tag friends = new Tag("Friends");
 
         TagManager tagManager = new TagManager();
 
+        
         // Assign tags
+        tagManager.assignTag(alice, family);
         tagManager.assignTag(alice, friends);
-        tagManager.assignTag(bob, work);
+        
 
         // Show tags
         System.out.println("Alice's tags: " + tagManager.getTags(alice));
-        System.out.println("Bob's tags: " + tagManager.getTags(bob));
+        
+
+        // Remove a tag
+        tagManager.removeTag(alice, friends);
+        System.out.println("Alice's tags after removal: " + tagManager.getTags(alice));
+        
     }
 }
